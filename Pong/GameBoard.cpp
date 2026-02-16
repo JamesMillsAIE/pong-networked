@@ -5,9 +5,9 @@
 #include "RaylibExt.h"
 #include "Window.h"
 
+float GameBoard::lineWidth = 10.f;
 Color GameBoard::m_renderColor = LIGHTGRAY;
 float GameBoard::m_fontSize = 50.f;
-float GameBoard::m_lineWidth = 10.f;
 
 GameBoard::GameBoard(Window* window, const float scoreOffset, const float dashS, const int32 dashCount)
 	: m_window{ window }, m_scoreOffset{ scoreOffset }, m_dashSpacing{ dashS }, m_dashCount{ dashCount }
@@ -26,19 +26,19 @@ void GameBoard::RenderBackground() const
 	const float h = m_window->Height();
 
 	// Render the top line of the board
-	Rectangle rect = { .x = 0, .y = 0, .width = w, .height = m_lineWidth };
+	Rectangle rect = { .x = 0, .y = 0, .width = w, .height = lineWidth };
 	DrawRectangleRec(rect, m_renderColor);
 
 	// Render the bottom line of the board
-	rect = { .x = 0.f, .y = h - m_lineWidth, .width = w, .height = m_lineWidth };
+	rect = { .x = 0.f, .y = h - lineWidth, .width = w, .height = lineWidth };
 	DrawRectangleRec(rect, m_renderColor);
 
 	// Calculate the length of a single dash
 	const float dashLength = h / static_cast<float>(m_dashCount) - m_dashSpacing * .5f;
 
 	// Set the default location and height of the dash
-	rect.x = w * .5f - m_lineWidth * .5f;
-	rect.width = m_lineWidth;
+	rect.x = w * .5f - lineWidth * .5f;
+	rect.width = lineWidth;
 	rect.height = dashLength;
 
 	// Render each dash in the correct location

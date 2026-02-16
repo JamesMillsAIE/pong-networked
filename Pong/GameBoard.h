@@ -10,6 +10,9 @@ enum class EHorizontalAlignment : uint8;
 class GameBoard
 {
 public:
+	static float lineWidth; /**< How thick the border and "net" are. */
+
+public:
 	/**
 	 * @param window The reference to the window.
 	 * @param scoreOffset How much the score is offset from each corner of the screen.
@@ -32,7 +35,6 @@ public:
 private:
 	static Color m_renderColor; /**< The color that the board and score render. */
 	static float m_fontSize; /**< The font size that the score renders at. */
-	static float m_lineWidth; /**< How thick the border and "net" are. */
 
 private:
 	class Window* m_window; /**< The reference to the window. Used to get the width and height of the screen. */

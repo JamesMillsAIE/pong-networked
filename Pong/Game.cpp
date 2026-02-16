@@ -4,6 +4,7 @@
 
 #include "Actor.h"
 #include "GameBoard.h"
+#include "Paddle.h"
 #include "RaylibExt.h"
 #include "Window.h"
 
@@ -86,7 +87,11 @@ int Game::Run()
 
 void Game::ConstructActors()
 {
+	Paddle* player1 = new Paddle{ EPlayerIndex::Player1, m_gameBoard, m_window };
+	Paddle* player2 = new Paddle{ EPlayerIndex::Player2, m_gameBoard, m_window };
 
+	m_actors.emplace_back(player1);
+	m_actors.emplace_back(player2);
 }
 
 void Game::Initialise()
@@ -113,8 +118,6 @@ void Game::Render() const
 {
 	// Render the Background
 	m_gameBoard->RenderBackground();
-	m_gameBoard->RenderScore(1, EHorizontalAlignment::Left);
-	m_gameBoard->RenderScore(2, EHorizontalAlignment::Right);
 
 	// Iterate over each actor and render it
 	for (Actor* actor : m_actors)

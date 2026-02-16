@@ -22,8 +22,8 @@ Rectangle Actor::Bounds() const
 {
 	return
 	{
-		location.x - size.x * .5f,
-		location.y - size.y * .5f,
+		location.x,
+		location.y,
 		size.x,
 		size.y
 	};

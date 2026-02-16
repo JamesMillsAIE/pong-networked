@@ -164,6 +164,7 @@
     <ClCompile Include="GameBoard.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Paddle.cpp" />
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -172,6 +173,7 @@
     <ClInclude Include="Debug.h" />
     <ClInclude Include="GameBoard.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="Paddle.h" />
     <ClInclude Include="RaylibExt.h" />
     <ClInclude Include="Window.h" />
   </ItemGroup>
