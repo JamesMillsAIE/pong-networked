@@ -1,10 +1,11 @@
-#include "Player.h"
+#include "Gameplay/Player.h"
+
+#include <Core/RaylibExt.h>
+#include <Core/Window.h>
+
+#include <Gameplay/GameBoard.h>
 
 #include <raylib/raymath.h>
-
-#include "GameBoard.h"
-#include "RaylibExt.h"
-#include "Window.h"
 
 constexpr float width = 15.f;
 constexpr float height = 100.f;

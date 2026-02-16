@@ -1,9 +1,9 @@
-#include "GameBoard.h"
+#include "Gameplay/GameBoard.h"
 
 #include <cassert>
 
-#include "RaylibExt.h"
-#include "Window.h"
+#include <Core/RaylibExt.h>
+#include <Core/Window.h>
 
 float GameBoard::lineWidth = 10.f;
 Color GameBoard::m_renderColor = { 128, 128, 128, 128 };

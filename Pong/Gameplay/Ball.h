@@ -1,8 +1,8 @@
 #pragma once
 
-#include "Actor.h"
-
 #include <vector>
+
+#include <Gameplay/Actor.h>
 
 using std::vector;
 

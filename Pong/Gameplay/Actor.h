@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Common.h"
+#include <Core/Common.h>
 
 /**
  * The base class for any object in the game.

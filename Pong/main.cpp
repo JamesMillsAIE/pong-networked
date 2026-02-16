@@ -1,6 +1,6 @@
 // ReSharper disable CppClangTidyModernizeMacroToEnum
-#include "Debug.h"
-#include "Game.h"
+#include <Core/Debug.h>
+#include <Core/Game.h>
 
 #define SCREEN_W 800
 #define SCREEN_H 450

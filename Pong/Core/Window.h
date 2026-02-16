@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Common.h"
+#include <Core/Common.h>
 
 /**
  * A utility class to handle all window management functions inside Raylib.

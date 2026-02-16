@@ -1,4 +1,4 @@
-#include "Actor.h"
+#include "Gameplay/Actor.h"
 
 Actor::Actor(const Vector2 location, const Vector2 size, const float rotation, const Color tint)
 	: location{ location }, size{ size }, rotation{ rotation }, tint{ tint }, canTick{ true }

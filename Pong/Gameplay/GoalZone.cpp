@@ -1,10 +1,11 @@
-#include "GoalZone.h"
+#include "Gameplay/GoalZone.h"
+
+#include <Core/Window.h>
+
+#include <Gameplay/Ball.h>
+#include <Gameplay/Player.h>
 
 #include <raylib/raymath.h>
-
-#include "Ball.h"
-#include "Player.h"
-#include "Window.h"
 
 constexpr float width = 10.f;
 

@@ -1,18 +1,19 @@
-#include "Ball.h"
+#include "Gameplay/Ball.h"
+
+#include <Core/Game.h>
+#include <Core/Window.h>
+
+#include <Gameplay/GameBoard.h>
+#include <Gameplay/Player.h>
 
 #include <raylib/raymath.h>
-
-#include "Game.h"
-#include "GameBoard.h"
-#include "Player.h"
-#include "Window.h"
 
 Ball::Ball(Window* window, Game* game, const vector<Player*>& paddles)
 	: Actor{ Vector2Zeros, Vector2Zeros, 0.f, BLUE }, radius{ 5.f }, m_window{ window },
 	m_game{ game }, m_direction{ Vector2Normalize({ 1.f, -1.f }) }, m_moveSpeed{ 100.f },
 	m_players{ paddles }
 {
-
+	canTick = false;
 }
 
 void Ball::BeginPlay()

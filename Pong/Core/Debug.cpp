@@ -1,4 +1,4 @@
-#include "Debug.h"
+#include "Core/Debug.h"
 
 #if _DEBUG
 #include <crtdbg.h>

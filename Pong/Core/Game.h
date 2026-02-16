@@ -1,8 +1,8 @@
 #pragma once
 
-#include "Common.h"
-
 #include <vector>
+
+#include <Core/Common.h>
 
 class Actor;
 class GameBoard;

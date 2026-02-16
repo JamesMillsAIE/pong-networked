@@ -1,13 +1,14 @@
-#include "Game.h"
+#include "Core/Game.h"
 
 #include <cassert>
 
-#include "Actor.h"
-#include "Ball.h"
-#include "GameBoard.h"
-#include "GoalZone.h"
-#include "Player.h"
-#include "Window.h"
+#include <Core/Window.h>
+
+#include <Gameplay/Actor.h>
+#include <Gameplay/Ball.h>
+#include <Gameplay/GameBoard.h>
+#include <Gameplay/GoalZone.h>
+#include <Gameplay/Player.h>
 
 Game* Game::m_instance = nullptr;
 
@@ -123,6 +124,18 @@ void Game::Initialise()
 
 void Game::Tick(const float dt) const
 {
+	// Wait for spacebar to be pressed to start the game
+	if (IsKeyPressed(KEY_SPACE))
+	{
+		for (Actor* actor : m_actors)
+		{
+			if (Ball* ball = dynamic_cast<Ball*>(actor))
+			{
+				ball->canTick = true;
+			}
+		}
+	}
+
 	// Tick each actor individually
 	for (Actor* actor : m_actors)
 	{

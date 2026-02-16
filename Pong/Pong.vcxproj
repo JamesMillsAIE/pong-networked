@@ -93,7 +93,7 @@
       <PreprocessorDefinitions>_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\include\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\include\;$(SolutionDir)Pong\</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -111,7 +111,7 @@
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\include\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\include\;$(SolutionDir)Pong\</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -129,7 +129,7 @@
       <PreprocessorDefinitions>_CRTDBG_MAP_ALLOC;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\include\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\include\;$(SolutionDir)Pong\</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -147,7 +147,7 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\include\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\include\;$(SolutionDir)Pong\</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -159,27 +159,27 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Actor.cpp" />
-    <ClCompile Include="Ball.cpp" />
-    <ClCompile Include="Debug.cpp" />
-    <ClCompile Include="GameBoard.cpp" />
-    <ClCompile Include="Game.cpp" />
-    <ClCompile Include="GoalZone.cpp" />
+    <ClCompile Include="Core\Debug.cpp" />
+    <ClCompile Include="Core\Game.cpp" />
+    <ClCompile Include="Core\Window.cpp" />
+    <ClCompile Include="Gameplay\Actor.cpp" />
+    <ClCompile Include="Gameplay\Ball.cpp" />
+    <ClCompile Include="Gameplay\GameBoard.cpp" />
+    <ClCompile Include="Gameplay\GoalZone.cpp" />
+    <ClCompile Include="Gameplay\Player.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Player.cpp" />
-    <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Actor.h" />
-    <ClInclude Include="Ball.h" />
-    <ClInclude Include="Common.h" />
-    <ClInclude Include="Debug.h" />
-    <ClInclude Include="GameBoard.h" />
-    <ClInclude Include="Game.h" />
-    <ClInclude Include="GoalZone.h" />
-    <ClInclude Include="Player.h" />
-    <ClInclude Include="RaylibExt.h" />
-    <ClInclude Include="Window.h" />
+    <ClInclude Include="Core\Common.h" />
+    <ClInclude Include="Core\Debug.h" />
+    <ClInclude Include="Core\Game.h" />
+    <ClInclude Include="Core\RaylibExt.h" />
+    <ClInclude Include="Core\Window.h" />
+    <ClInclude Include="Gameplay\Actor.h" />
+    <ClInclude Include="Gameplay\Ball.h" />
+    <ClInclude Include="Gameplay\GameBoard.h" />
+    <ClInclude Include="Gameplay\GoalZone.h" />
+    <ClInclude Include="Gameplay\Player.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
