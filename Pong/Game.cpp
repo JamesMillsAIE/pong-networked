@@ -3,9 +3,10 @@
 #include <cassert>
 
 #include "Actor.h"
+#include "Ball.h"
 #include "GameBoard.h"
-#include "Paddle.h"
-#include "RaylibExt.h"
+#include "GoalZone.h"
+#include "Player.h"
 #include "Window.h"
 
 Game* Game::m_instance = nullptr;
@@ -87,11 +88,21 @@ int Game::Run()
 
 void Game::ConstructActors()
 {
-	Paddle* player1 = new Paddle{ EPlayerIndex::Player1, m_gameBoard, m_window };
-	Paddle* player2 = new Paddle{ EPlayerIndex::Player2, m_gameBoard, m_window };
+	Player* player1 = new Player{ EPlayerIndex::Player1, m_gameBoard, m_window };
+	Player* player2 = new Player{ EPlayerIndex::Player2, m_gameBoard, m_window };
+
+	Ball* ball = new Ball{ m_window, { player1, player2 } };
+
+	GoalZone* gz1 = new GoalZone{ ball, player2, m_window };
+	GoalZone* gz2 = new GoalZone{ ball, player1, m_window };
+
+	m_actors.emplace_back(gz1);
+	m_actors.emplace_back(gz2);
 
 	m_actors.emplace_back(player1);
 	m_actors.emplace_back(player2);
+
+	m_actors.emplace_back(ball);
 }
 
 void Game::Initialise()

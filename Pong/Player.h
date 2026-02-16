@@ -14,15 +14,18 @@ class Window;
 /**
  * The class for the controllable paddles by the player.
  */
-class Paddle : public Actor
+class Player : public Actor
 {
+public:
+	EPlayerIndex index; /**< The index of the player, used for keybinds and colors / position. */
+
 public:
 	/**
 	 * @param index The player index that is associated with this paddle.
 	 * @param board The reference to the board for rendering score.
 	 * @param window The reference to the window to be used for screen calculations.
 	 */
-	Paddle(EPlayerIndex index, GameBoard* board, Window* window);
+	Player(EPlayerIndex index, GameBoard* board, Window* window);
 
 public:
 	/** The initialisation function of the actor. */
@@ -37,13 +40,17 @@ public:
 	/** The function where the actor can draw itself. */
 	void Render() override;
 
+	/** Adds a point to the score. */
+	void AddScore();
+
+	/** Gets the current score of the player. */
+	int32 GetScore() const;
+
 private:
 	GameBoard* m_gameBoard; /**< The reference to the window to be used for screen calculations. */
 	Window* m_window; /**< The reference to the window for size access. */
 
-	EPlayerIndex m_index; /**< The index of the player, used for keybinds and colors / position. */
 	int32 m_score; /**< The current score of the player. */
-
 	float m_moveSpeed; /**< The speed that the paddle moves at. */
 
 };

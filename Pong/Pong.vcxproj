@@ -160,20 +160,24 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Actor.cpp" />
+    <ClCompile Include="Ball.cpp" />
     <ClCompile Include="Debug.cpp" />
     <ClCompile Include="GameBoard.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="GoalZone.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Paddle.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actor.h" />
+    <ClInclude Include="Ball.h" />
     <ClInclude Include="Common.h" />
     <ClInclude Include="Debug.h" />
     <ClInclude Include="GameBoard.h" />
     <ClInclude Include="Game.h" />
-    <ClInclude Include="Paddle.h" />
+    <ClInclude Include="GoalZone.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="RaylibExt.h" />
     <ClInclude Include="Window.h" />
   </ItemGroup>
