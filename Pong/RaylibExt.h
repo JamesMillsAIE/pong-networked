@@ -1,32 +1,41 @@
 #pragma once
 
-#include "raylib/raylib.h"
+#include "Common.h"
 
-// Horizontal alignment options
-enum class EHorizontalAlignment : unsigned char
+/** Horizontal alignment options. */
+enum class EHorizontalAlignment : uint8
 {
 	Left,
 	Center,
 	Right
 };
 
-// Vertical alignment options
-enum class EVerticalAlignment : unsigned char
+/** Vertical alignment options. */
+enum class EVerticalAlignment : uint8
 {
 	Top,
 	Middle,
 	Bottom
 };
 
-// Draw text with custom horizontal and vertical alignment
-inline void DrawTextAligned(const char* text, const int x, const int y, const int fontSize, const Color color,
+/**
+ * Draw text with custom horizontal and vertical alignment
+ * @param text The text to render to the screen.
+ * @param x The horizontal position to place the text.
+ * @param y The vertical position to place the text.
+ * @param fontSize How large the text should be on the screen.
+ * @param color The color the text should render.
+ * @param hAlign The horizontal alignment of the text.
+ * @param vAlign The vertical alignment of the text.
+ */
+inline void DrawTextAligned(const int8* text, const int32 x, const int32 y, const int32 fontSize, const Color color,
 	const EHorizontalAlignment hAlign = EHorizontalAlignment::Left, const EVerticalAlignment vAlign = EVerticalAlignment::Top)
 {
-	const int textWidth = MeasureText(text, fontSize);
-	const int textHeight = fontSize;  // Approximate height based on font size
+	const int32 textWidth = MeasureText(text, fontSize);
+	const int32 textHeight = fontSize;  // Approximate height based on font size
 
-	int drawX = x;
-	int drawY = y;
+	int32 drawX = x;
+	int32 drawY = y;
 
 	// Adjust horizontal position based on alignment
 	switch (hAlign)
@@ -71,8 +80,19 @@ inline void DrawTextAligned(const char* text, const int x, const int y, const in
 	DrawText(text, drawX, drawY, fontSize, color);
 }
 
-// Overload for using a custom Font
-inline void DrawTextAligned(const Font& font, const char* text, const Vector2 position, const float fontSize,
+/**
+ * Draw text with custom horizontal and vertical alignment.
+ * Overload for using a custom Font.
+ * @param font The font used to render the text.
+ * @param text The text to render to the screen.
+ * @param position The location to place the text on the screen.
+ * @param fontSize How large the text should be on the screen.
+ * @param spacing How far apart each character is.
+ * @param color The color the text should render.
+ * @param hAlign The horizontal alignment of the text.
+ * @param vAlign The vertical alignment of the text.
+ */
+inline void DrawTextAligned(const Font& font, const int8* text, const Vector2 position, const float fontSize,
 	const float spacing, const Color color, const EHorizontalAlignment hAlign = EHorizontalAlignment::Left,
 	const EVerticalAlignment vAlign = EVerticalAlignment::Top)
 {

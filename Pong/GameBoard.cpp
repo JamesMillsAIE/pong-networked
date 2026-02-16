@@ -1,47 +1,64 @@
 #include "GameBoard.h"
 
-#include <cstdio>
-
-#include <raylib/raylib.h>
+#include <cassert>
 
 #include "RaylibExt.h"
+#include "Window.h"
 
 Color GameBoard::m_renderColor = LIGHTGRAY;
+float GameBoard::m_fontSize = 50.f;
+float GameBoard::m_lineWidth = 10.f;
 
-void GameBoard::RenderBackground(const float w, const float h, const float lineW, const float dashSpacing, const int dashCount)
+GameBoard::GameBoard(Window* window, const float scoreOffset, const float dashS, const int32 dashCount)
+	: m_window{ window }, m_scoreOffset{ scoreOffset }, m_dashSpacing{ dashS }, m_dashCount{ dashCount }
+{}
+
+GameBoard::~GameBoard()
 {
-	Rectangle rect = { 0, 0, w, lineW };
+	m_window = nullptr;
+}
+
+void GameBoard::RenderBackground() const
+{
+	// Validate the window pointer and get the width / height of the screen
+	assert(m_window != nullptr && L"Window is nullptr");
+	const float w = m_window->Width();
+	const float h = m_window->Height();
+
+	// Render the top line of the board
+	Rectangle rect = { .x = 0, .y = 0, .width = w, .height = m_lineWidth };
 	DrawRectangleRec(rect, m_renderColor);
 
-	rect = { .x = 0.f, .y = h - lineW, .width = w, .height = lineW };
+	// Render the bottom line of the board
+	rect = { .x = 0.f, .y = h - m_lineWidth, .width = w, .height = m_lineWidth };
 	DrawRectangleRec(rect, m_renderColor);
 
-	const float dashLength = h / static_cast<float>(dashCount) - dashSpacing * .5f;
+	// Calculate the length of a single dash
+	const float dashLength = h / static_cast<float>(m_dashCount) - m_dashSpacing * .5f;
 
-	rect.x = w * .5f - lineW * .5f;
-	rect.width = lineW;
+	// Set the default location and height of the dash
+	rect.x = w * .5f - m_lineWidth * .5f;
+	rect.width = m_lineWidth;
 	rect.height = dashLength;
 
-	for (int i = 0; i < dashCount; ++i)
+	// Render each dash in the correct location
+	for (int32 i = 0; i < m_dashCount; ++i)
 	{
-		rect.y = static_cast<float>(i) * (dashLength + dashSpacing);
+		rect.y = static_cast<float>(i) * (dashLength + m_dashSpacing);
 		DrawRectangleRec(rect, m_renderColor);
 	}
 }
 
-void GameBoard::RenderScore(const float x, const float y, const unsigned int score, const bool alignRight, const float fontSize)
+void GameBoard::RenderScore(const uint32 score, const EHorizontalAlignment alignment) const
 {
-	if (score >= 10)
-	{
-		return;
-	}
+	// Validate the window pointer and get the screen width
+	assert(m_window != nullptr && L"Window is nullptr");
+	const float w = m_window->Width();
 
-	char text[2];
-	if (sprintf_s(text, 2, "%d", score) == -1)
-	{
-		return;
-	}
+	// Count the amount of digits in the score
+	const string scoreText = std::to_string(score);
 
-	const Font font = GetFontDefault();
-	DrawTextAligned(font, text, { x, y }, fontSize, 0.f, m_renderColor, alignRight ? EHorizontalAlignment::Right : EHorizontalAlignment::Left);
+	// Render the text to the correct side of the screen
+	const float x = alignment == EHorizontalAlignment::Left ? m_scoreOffset : w - m_scoreOffset;
+	DrawTextAligned(GetFontDefault(), scoreText.c_str(), { x, m_scoreOffset }, m_fontSize, 0.f, m_renderColor, alignment);
 }
