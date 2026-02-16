@@ -20,7 +20,7 @@ void Game::Quit()
 
 Game::Game(const float w, const float h, const int8* title, const Color clrColor)
 	: m_window{ new Window{ w, h, title, clrColor } }, m_isRunning{ true },
-	m_gameBoard{ new GameBoard{ m_window, 15.f, 15.f, 10 } }, m_goalScore{ 1 }
+	m_gameBoard{ new GameBoard{ m_window, 15.f, 15.f, 10 } }, m_goalScore{ 5 }
 {}
 
 Game::~Game()
