@@ -2,8 +2,13 @@
 
 #include "Common.h"
 
-class Window;
+#include <vector>
+
+class Actor;
 class GameBoard;
+class Window;
+
+using std::vector;
 
 /**
  * The main control class of the game. Handles the window and actor memory.
@@ -42,18 +47,22 @@ private:
 	bool m_isRunning; /**< The variable to keep track of the open state of the game. */
 
 	GameBoard* m_gameBoard; /**< Used to render the score and border / "net". */
+	vector<Actor*> m_actors; /**< The collection of actors in the game. */
 
 private:
+	/** The function used to create the actors and insert them into the actor list. */
+	void ConstructActors();
+
 	/** The initialisation function of the game. Used to initialise each actor and their default values. */
 	void Initialise();
 
 	/** The main update function of the game. Ticks each actor. */
-	void Tick(float dt);
+	void Tick(float dt) const;
 
 	/** The main render function of the game. Renders each actor. */
-	void Render();
+	void Render() const;
 
 	/** The cleanup function of the game. Will automatically clean up the actors. */
-	void Shutdown();
+	void Shutdown() const;
 
 };
