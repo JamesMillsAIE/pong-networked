@@ -168,6 +168,7 @@
     <ClCompile Include="Gameplay\GoalZone.cpp" />
     <ClCompile Include="Gameplay\Player.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Network\INetwork.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core\Common.h" />
@@ -180,6 +181,7 @@
     <ClInclude Include="Gameplay\GameBoard.h" />
     <ClInclude Include="Gameplay\GoalZone.h" />
     <ClInclude Include="Gameplay\Player.h" />
+    <ClInclude Include="Network\INetwork.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

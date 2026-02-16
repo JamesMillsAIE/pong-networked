@@ -21,6 +21,12 @@
     <Filter Include="Source Files\Gameplay">
       <UniqueIdentifier>{08a2734a-74ef-452c-90cd-112e69131cec}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Network">
+      <UniqueIdentifier>{12e4bfaa-1199-429e-bc0f-d07d65e51483}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Network">
+      <UniqueIdentifier>{1169386b-f179-414f-9757-82ae0e8a9e40}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -49,6 +55,9 @@
     </ClCompile>
     <ClCompile Include="Gameplay\Player.cpp">
       <Filter>Source Files\Gameplay</Filter>
+    </ClCompile>
+    <ClCompile Include="Network\INetwork.cpp">
+      <Filter>Source Files\Network</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -81,6 +90,9 @@
     </ClInclude>
     <ClInclude Include="Gameplay\Player.h">
       <Filter>Header Files\Gameplay</Filter>
+    </ClInclude>
+    <ClInclude Include="Network\INetwork.h">
+      <Filter>Header Files\Network</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
