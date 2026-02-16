@@ -9,6 +9,6 @@ public:
 	static void RenderScore(float x, float y, unsigned int score, bool alignRight = false, float fontSize = 50);
 
 private:
-	static Color renderColor;
+	static Color m_renderColor;
 
 };

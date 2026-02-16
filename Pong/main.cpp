@@ -1,28 +1,19 @@
-#include <cstdlib>
-#include <raylib/raylib.h>
+// ReSharper disable CppClangTidyModernizeMacroToEnum
+#include "Debug.h"
+#include "Game.h"
 
-#include "GameBoard.h"
+#define SCREEN_W 800
+#define SCREEN_H 450
+#define GAME_NAME "Pong"
+#define CLR_COLOR BLACK
 
 int main()
 {
-    constexpr float screenWidth = 800;
-    constexpr float screenHeight = 450;
+    Debug::Init();
 
-    InitWindow(static_cast<int>(screenWidth), static_cast<int>(screenHeight), "raylib [core] example - basic window");
-
-    while (!WindowShouldClose())
-    {
-        BeginDrawing();
-        ClearBackground(BLACK);
-
-        GameBoard::RenderBackground(screenWidth, screenHeight, 10.f, 15.f, 10);
-        GameBoard::RenderScore(15.f, 15.f, 1);
-        GameBoard::RenderScore(screenWidth - 15.f, 15.f, 1, true);
-
-        EndDrawing();
-    }
-
-    CloseWindow();
-
-	return EXIT_SUCCESS;
+    Game* game = new Game{ SCREEN_W, SCREEN_H, GAME_NAME, CLR_COLOR };
+    const int returnState = game->Run();
+    
+    delete game;
+	return returnState;
 }
