@@ -44,13 +44,13 @@ public:
 	void AddScore();
 
 	/** Gets the current score of the player. */
-	int32 GetScore() const;
+	uint8 GetScore() const;
 
 private:
 	GameBoard* m_gameBoard; /**< The reference to the window to be used for screen calculations. */
 	Window* m_window; /**< The reference to the window for size access. */
 
-	int32 m_score; /**< The current score of the player. */
+	uint8 m_score; /**< The current score of the player. */
 	float m_moveSpeed; /**< The speed that the paddle moves at. */
 
 };

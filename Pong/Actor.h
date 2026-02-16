@@ -12,6 +12,7 @@ public:
 	Vector2 size; /**< The size of the entire actor; for circles the magnitude is the diameter. */
 	float rotation; /**< The current orientation of the actor in world-space. */
 	Color tint; /**< The color of the object when rendering. It can be used to change the tint of a sprite. */
+	bool canTick; /**< Determines whether the actor can tick, used to pause the game. */
 
 public:
 	/**

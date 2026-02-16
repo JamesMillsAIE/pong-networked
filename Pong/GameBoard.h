@@ -30,7 +30,7 @@ public:
 	 * @param score The score to render to the screen.
 	 * @param alignment EHorizontalAlignment::Left is player 1, EHorizontalAlignment::Right is player 2.
 	 */
-	void RenderScore(uint32 score, EHorizontalAlignment alignment) const;
+	void RenderScore(uint8 score, EHorizontalAlignment alignment) const;
 
 private:
 	static Color m_renderColor; /**< The color that the board and score render. */

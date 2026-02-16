@@ -2,13 +2,15 @@
 
 #include <raylib/raymath.h>
 
+#include "Game.h"
 #include "GameBoard.h"
 #include "Player.h"
 #include "Window.h"
 
-Ball::Ball(Window* window, const vector<Player*>& paddles)
+Ball::Ball(Window* window, Game* game, const vector<Player*>& paddles)
 	: Actor{ Vector2Zeros, Vector2Zeros, 0.f, BLUE }, radius{ 5.f }, m_window{ window },
-	m_direction{ Vector2Normalize({ 1.f, -1.f }) }, m_moveSpeed{ 100.f }, m_paddles{ paddles }
+	m_game{ game }, m_direction{ Vector2Normalize({ 1.f, -1.f }) }, m_moveSpeed{ 100.f },
+	m_players{ paddles }
 {
 
 }
@@ -40,7 +42,7 @@ void Ball::Tick(float dt)
 	}
 
 	// Check the collision against each paddle
-	for (const Player* paddle : m_paddles)
+	for (const Player* paddle : m_players)
 	{
 		if (CheckCollisionCircleRec(location, radius, paddle->Bounds()))
 		{
@@ -89,4 +91,12 @@ void Ball::Reset(const Vector2 dir)
 		.x = m_window->Width() * .5f,
 		.y = m_window->Height() * .5f
 	};
+
+	for (const Player* player : m_players)
+	{
+		if (player->GetScore() >= m_game->GetGoalScore())
+		{
+			canTick = false;
+		}
+	}
 }

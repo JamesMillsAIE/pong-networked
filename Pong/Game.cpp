@@ -20,7 +20,7 @@ void Game::Quit()
 
 Game::Game(const float w, const float h, const int8* title, const Color clrColor)
 	: m_window{ new Window{ w, h, title, clrColor } }, m_isRunning{ true },
-	m_gameBoard{ new GameBoard{ m_window, 15.f, 15.f, 10 } }
+	m_gameBoard{ new GameBoard{ m_window, 15.f, 15.f, 10 } }, m_goalScore{ 1 }
 {}
 
 Game::~Game()
@@ -86,15 +86,20 @@ int Game::Run()
 	return EXIT_SUCCESS;
 }
 
+uint8 Game::GetGoalScore() const
+{
+	return m_goalScore;
+}
+
 void Game::ConstructActors()
 {
 	Player* player1 = new Player{ EPlayerIndex::Player1, m_gameBoard, m_window };
 	Player* player2 = new Player{ EPlayerIndex::Player2, m_gameBoard, m_window };
 
-	Ball* ball = new Ball{ m_window, { player1, player2 } };
+	Ball* ball = new Ball{ m_window, this, { player1, player2 } };
 
-	GoalZone* gz1 = new GoalZone{ ball, player2, m_window };
-	GoalZone* gz2 = new GoalZone{ ball, player1, m_window };
+	GoalZone* gz1 = new GoalZone{ ball, player1, m_window };
+	GoalZone* gz2 = new GoalZone{ ball, player2, m_window };
 
 	m_actors.emplace_back(gz1);
 	m_actors.emplace_back(gz2);
@@ -121,7 +126,10 @@ void Game::Tick(const float dt) const
 	// Tick each actor individually
 	for (Actor* actor : m_actors)
 	{
-		actor->Tick(dt);
+		if (actor->canTick)
+		{
+			actor->Tick(dt);
+		}
 	}
 }
 

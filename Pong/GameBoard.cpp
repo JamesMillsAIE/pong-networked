@@ -6,7 +6,7 @@
 #include "Window.h"
 
 float GameBoard::lineWidth = 10.f;
-Color GameBoard::m_renderColor = LIGHTGRAY;
+Color GameBoard::m_renderColor = { 128, 128, 128, 128 };
 float GameBoard::m_fontSize = 50.f;
 
 GameBoard::GameBoard(Window* window, const float scoreOffset, const float dashS, const int32 dashCount)
@@ -33,8 +33,12 @@ void GameBoard::RenderBackground() const
 	rect = { .x = 0.f, .y = h - lineWidth, .width = w, .height = lineWidth };
 	DrawRectangleRec(rect, m_renderColor);
 
-	// Calculate the length of a single dash
-	const float dashLength = h / static_cast<float>(m_dashCount) - m_dashSpacing * .5f;
+	// Available height excludes top and bottom lines
+	const float availableHeight = h - 2.f * lineWidth;
+	const float totalSpacing = m_dashSpacing * static_cast<float>(m_dashCount - 1);
+
+	// Calculate the length of each dash
+	const float dashLength = (availableHeight - totalSpacing) / static_cast<float>(m_dashCount);
 
 	// Set the default location and height of the dash
 	rect.x = w * .5f - lineWidth * .5f;
@@ -44,12 +48,12 @@ void GameBoard::RenderBackground() const
 	// Render each dash in the correct location
 	for (int32 i = 0; i < m_dashCount; ++i)
 	{
-		rect.y = static_cast<float>(i) * (dashLength + m_dashSpacing);
+		rect.y = static_cast<float>(i) * (dashLength + m_dashSpacing) + lineWidth;
 		DrawRectangleRec(rect, m_renderColor);
 	}
 }
 
-void GameBoard::RenderScore(const uint32 score, const EHorizontalAlignment alignment) const
+void GameBoard::RenderScore(const uint8 score, const EHorizontalAlignment alignment) const
 {
 	// Validate the window pointer and get the screen width
 	assert(m_window != nullptr && L"Window is nullptr");

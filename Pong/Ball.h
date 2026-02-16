@@ -6,6 +6,7 @@
 
 using std::vector;
 
+class Game;
 class GameBoard;
 class Player;
 class Window;
@@ -21,9 +22,10 @@ public:
 public:
 	/**
 	 * @param window The reference to the window to be used for screen calculations.
+	 * @param game The reference to the game for max score access.
 	 * @param paddles The list of paddles to check collisions against.
 	 */
-	Ball(Window* window, const vector<Player*>& paddles);
+	Ball(Window* window, Game* game, const vector<Player*>& paddles);
 
 public:
 	/** The initialisation function of the actor. */
@@ -43,10 +45,11 @@ public:
 
 private:
 	Window* m_window; /**< The reference to the window for size access. */
+	Game* m_game; /**< The reference to the game for max score access. */
 
 	Vector2 m_direction; /**< The direction the ball is moving in. */
 	float m_moveSpeed; /**< How fast the ball moves in the direction every section. */
 
-	vector<Player*> m_paddles; /**< The list of paddles to handle collisions. */
+	vector<Player*> m_players; /**< The list of paddles to handle collisions. */
 
 };

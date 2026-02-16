@@ -17,7 +17,7 @@ void GoalZone::BeginPlay()
 {
 	location =
 	{
-		.x = (m_scorer->index == EPlayerIndex::Player1 ? 0.f : m_window->Width() - width),
+		.x = m_scorer->index == EPlayerIndex::Player1 ? m_window->Width() - width : 0.f,
 		.y = 0.f
 	};
 }
@@ -29,12 +29,11 @@ void GoalZone::Tick(float dt)
 		m_scorer->AddScore();
 
 		m_ball->Reset(
-			Vector2Normalize({ .x = m_scorer->index == EPlayerIndex::Player1 ? -1.f : 1.f, .y = -1.f })
-		);
+		              Vector2Normalize(
+		                               {
+			                               .x = m_scorer->index == EPlayerIndex::Player1 ? 1.f : -1.f,
+			                               .y = GetRandomValue(0, 1) == 0 ? -1.f : 1.f
+		                               })
+		             );
 	}
-}
-
-void GoalZone::Render()
-{
-	DrawRectangleRec(Bounds(), tint);
 }

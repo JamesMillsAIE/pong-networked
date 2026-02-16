@@ -50,7 +50,7 @@ void Player::AddScore()
 	m_score++;
 }
 
-int32 Player::GetScore() const
+uint8 Player::GetScore() const
 {
 	return m_score;
 }

@@ -39,6 +39,9 @@ public:
 	 */
 	int Run();
 
+	/** Returns the max score required to win the game. */
+	uint8 GetGoalScore() const;
+
 private:
 	static Game* m_instance; /**< The instance of the game. Used to prevent multiple games being created at once. */
 
@@ -48,6 +51,8 @@ private:
 
 	GameBoard* m_gameBoard; /**< Used to render the score and border / "net". */
 	vector<Actor*> m_actors; /**< The collection of actors in the game. */
+
+	uint8 m_goalScore; /**< The value used to determine the score to reach to win. */
 
 private:
 	/** The function used to create the actors and insert them into the actor list. */

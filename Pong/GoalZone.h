@@ -26,9 +26,6 @@ public:
 	 */
 	void Tick(float dt) override;
 
-	/** The function where the actor can draw itself. */
-	void Render() override;
-
 private:
 	Ball* m_ball; /**< The reference to the ball. */
 	Player* m_scorer; /**< The player that will receive a point when a goal is scored. */
