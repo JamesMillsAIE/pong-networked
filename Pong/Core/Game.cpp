@@ -11,6 +11,8 @@
 #include <Gameplay/GoalZone.h>
 #include <Gameplay/Player.h>
 
+#include "Network/INetwork.h"
+
 Game* Game::m_instance = nullptr;
 
 void Game::Quit()
@@ -68,6 +70,9 @@ int Game::Run()
 
 	while (m_isRunning)
 	{
+		// Run the network loop
+		m_network->Tick();
+
 	#ifndef SERVER
 		Tick(GetFrameTime());
 
