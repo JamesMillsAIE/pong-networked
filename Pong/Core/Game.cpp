@@ -1,3 +1,5 @@
+#include "pch.h"
+
 #include "Core/Game.h"
 
 #include <cassert>
@@ -42,7 +44,7 @@ Game::~Game()
 	m_window = nullptr;
 }
 
-int Game::Run()
+int Game::Run(const bool isServer)
 {
 	// If the instance has already been set, return a fail code 
 	if (m_instance != nullptr)
@@ -53,34 +55,41 @@ int Game::Run()
 	// Make this instance the singleton instance
 	m_instance = this;
 
-	// Attempt to open the window, if it fails, return an error code
-	if (!m_window->Open())
+	if (isServer)
 	{
-		return WindowFailedToOpen;
+		
 	}
-
-	// Run the initialisation code
-	Initialise();
-
-	while (m_isRunning)
+	else
 	{
-		Tick(GetFrameTime());
-
-		// Render the screen, clearing it using the window system
-		m_window->BeginFrame();
-		Render();
-		m_window->EndFrame();
-
-		// If the window close request has been made, quit the game
-		if (WindowShouldClose())
+		// Attempt to open the window, if it fails, return an error code
+		if (!m_window->Open())
 		{
-			Quit();
+			return WindowFailedToOpen;
 		}
-	}
 
-	// Run the cleanup functionality and close the window.
-	Shutdown();
-	m_window->Close();
+		// Run the initialisation code
+		Initialise();
+
+		while (m_isRunning)
+		{
+			Tick(GetFrameTime());
+
+			// Render the screen, clearing it using the window system
+			m_window->BeginFrame();
+			Render();
+			m_window->EndFrame();
+
+			// If the window close request has been made, quit the game
+			if (WindowShouldClose())
+			{
+				Quit();
+			}
+		}
+
+		// Run the cleanup functionality and close the window.
+		Shutdown();
+		m_window->Close();
+	}
 
 	// Reset the instance pointer and return success.
 	m_instance = nullptr;

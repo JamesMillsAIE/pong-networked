@@ -1,3 +1,5 @@
+#include "pch.h"
+
 #include "Gameplay/Actor.h"
 
 Actor::Actor(const Vector2 location, const Vector2 size, const float rotation, const Color tint)

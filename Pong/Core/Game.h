@@ -6,6 +6,7 @@
 
 class Actor;
 class GameBoard;
+class INetwork;
 class Window;
 
 using std::vector;
@@ -35,9 +36,10 @@ public:
 public:
 	/**
 	 * Runs the complete game loop; including Tick and Rendering.
+	 * @param isServer The flag for whether this is running a server or not.
 	 * @return The success state of the Game Loop.
 	 */
-	int Run();
+	int Run(bool isServer);
 
 	/** Returns the max score required to win the game. */
 	uint8 GetGoalScore() const;
@@ -53,6 +55,8 @@ private:
 	vector<Actor*> m_actors; /**< The collection of actors in the game. */
 
 	uint8 m_goalScore; /**< The value used to determine the score to reach to win. */
+
+	INetwork* m_network; /**< The network this instance of the game is running on. */
 
 private:
 	/** The function used to create the actors and insert them into the actor list. */

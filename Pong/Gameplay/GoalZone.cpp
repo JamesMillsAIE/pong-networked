@@ -1,3 +1,5 @@
+#include "pch.h"
+
 #include "Gameplay/GoalZone.h"
 
 #include <Core/Window.h>

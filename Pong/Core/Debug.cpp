@@ -1,3 +1,5 @@
+#include "pch.h"
+
 #include "Core/Debug.h"
 
 #include <iostream>

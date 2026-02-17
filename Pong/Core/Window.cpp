@@ -1,4 +1,6 @@
 // ReSharper disable CppMemberFunctionMayBeStatic
+#include "pch.h"
+
 #include "Core/Window.h"
 
 #include <cstring>
