@@ -63,7 +63,7 @@ private:
 	void ConstructActors();
 
 	/** The initialisation function of the game. Used to initialise each actor and their default values. */
-	void Initialise();
+	void Initialise() const;
 
 	/** The main update function of the game. Ticks each actor. */
 	void Tick(float dt) const;

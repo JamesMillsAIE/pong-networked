@@ -21,7 +21,7 @@ int main()
     INetwork* network = new NetworkClient;
 #else
     INetwork* network = new NetworkServer;
-#endif // !SERVER
+#endif
 
     // Create the game instance with the correct network
     Game* game = new Game{ SCREEN_W, SCREEN_H, GAME_NAME, CLR_COLOR, network };

@@ -11,7 +11,7 @@
 #include <Gameplay/GoalZone.h>
 #include <Gameplay/Player.h>
 
-#include "Network/INetwork.h"
+#include <Network/INetwork.h>
 
 Game* Game::m_instance = nullptr;
 
@@ -63,10 +63,13 @@ int Game::Run()
 	{
 		return WindowFailedToOpen;
 	}
-#endif // 0
+#endif
 
 	// Run the initialisation code
+	ConstructActors();
+#ifndef SERVER
 	Initialise();
+#endif
 
 	while (m_isRunning)
 	{
@@ -86,16 +89,14 @@ int Game::Run()
 		{
 			Quit();
 		}
-	#else
-		Tick(0.f);
-	#endif // SERVER
+	#endif
 	}
 
+#ifndef SERVER
 	// Run the cleanup functionality and close the window.
 	Shutdown();
-#ifndef SERVER
 	m_window->Close();
-#endif // !SERVER
+#endif
 
 	// Reset the instance pointer and return success.
 	m_instance = nullptr;
@@ -126,10 +127,8 @@ void Game::ConstructActors()
 	m_actors.emplace_back(ball);
 }
 
-void Game::Initialise()
+void Game::Initialise() const
 {
-	ConstructActors();
-
 	// Iterate over each actor and run it's initialise function
 	for (Actor* actor : m_actors)
 	{
@@ -139,7 +138,6 @@ void Game::Initialise()
 
 void Game::Tick(const float dt) const
 {
-#ifndef SERVER
 	// Wait for space bar to be pressed to start the game
 	if (IsKeyPressed(KEY_SPACE))
 	{
@@ -151,7 +149,6 @@ void Game::Tick(const float dt) const
 			}
 		}
 	}
-#endif // !SERVER
 
 	// Tick each actor individually
 	for (Actor* actor : m_actors)
