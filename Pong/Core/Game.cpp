@@ -1,9 +1,8 @@
 #include "pch.h"
 
-#include "Core/Game.h"
-
 #include <cassert>
 
+#include <Core/Game.h>
 #include <Core/Window.h>
 
 #include <Gameplay/Actor.h>
@@ -21,9 +20,10 @@ void Game::Quit()
 	m_instance->m_isRunning = false;
 }
 
-Game::Game(const float w, const float h, const int8* title, const Color clrColor)
+Game::Game(const float w, const float h, const int8* title, const Color clrColor, INetwork* network)
 	: m_window{ new Window{ w, h, title, clrColor } }, m_isRunning{ true },
-	m_gameBoard{ new GameBoard{ m_window, 15.f, 15.f, 10 } }, m_goalScore{ 5 }
+	m_gameBoard{ new GameBoard{ m_window, 15.f, 15.f, 10 } }, m_goalScore{ 5 },
+	m_network{ network }
 {}
 
 Game::~Game()
@@ -44,7 +44,7 @@ Game::~Game()
 	m_window = nullptr;
 }
 
-int Game::Run(const bool isServer)
+int Game::Run()
 {
 	// If the instance has already been set, return a fail code 
 	if (m_instance != nullptr)
@@ -55,41 +55,42 @@ int Game::Run(const bool isServer)
 	// Make this instance the singleton instance
 	m_instance = this;
 
-	if (isServer)
+#ifndef SERVER
+	// Attempt to open the window, if it fails, return an error code
+	if (!m_window->Open())
 	{
-		
+		return WindowFailedToOpen;
 	}
-	else
+#endif // 0
+
+	// Run the initialisation code
+	Initialise();
+
+	while (m_isRunning)
 	{
-		// Attempt to open the window, if it fails, return an error code
-		if (!m_window->Open())
+	#ifndef SERVER
+		Tick(GetFrameTime());
+
+		// Render the screen, clearing it using the window system
+		m_window->BeginFrame();
+		Render();
+		m_window->EndFrame();
+
+		// If the window close request has been made, quit the game
+		if (WindowShouldClose())
 		{
-			return WindowFailedToOpen;
+			Quit();
 		}
-
-		// Run the initialisation code
-		Initialise();
-
-		while (m_isRunning)
-		{
-			Tick(GetFrameTime());
-
-			// Render the screen, clearing it using the window system
-			m_window->BeginFrame();
-			Render();
-			m_window->EndFrame();
-
-			// If the window close request has been made, quit the game
-			if (WindowShouldClose())
-			{
-				Quit();
-			}
-		}
-
-		// Run the cleanup functionality and close the window.
-		Shutdown();
-		m_window->Close();
+	#else
+		Tick(0.f);
+	#endif // SERVER
 	}
+
+	// Run the cleanup functionality and close the window.
+	Shutdown();
+#ifndef SERVER
+	m_window->Close();
+#endif // !SERVER
 
 	// Reset the instance pointer and return success.
 	m_instance = nullptr;
@@ -133,7 +134,8 @@ void Game::Initialise()
 
 void Game::Tick(const float dt) const
 {
-	// Wait for spacebar to be pressed to start the game
+#ifndef SERVER
+	// Wait for space bar to be pressed to start the game
 	if (IsKeyPressed(KEY_SPACE))
 	{
 		for (Actor* actor : m_actors)
@@ -144,6 +146,7 @@ void Game::Tick(const float dt) const
 			}
 		}
 	}
+#endif // !SERVER
 
 	// Tick each actor individually
 	for (Actor* actor : m_actors)

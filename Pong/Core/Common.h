@@ -18,8 +18,7 @@ typedef unsigned long uint64;
 
 enum EExitResult : uint8
 {
-	IncorrectArgumentCount = 2,
-	InstanceNotNull,
+	InstanceNotNull = 2,
 	WindowFailedToOpen,
 	NetworkFailedToInitialise,
 	NetworkHostCreateFailed

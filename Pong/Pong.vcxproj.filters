@@ -62,6 +62,9 @@
     <ClCompile Include="Network\NetworkServer.cpp">
       <Filter>Source Files\Network</Filter>
     </ClCompile>
+    <ClCompile Include="Network\NetworkClient.cpp">
+      <Filter>Source Files\Network</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core\Window.h">
@@ -102,6 +105,9 @@
     </ClInclude>
     <ClInclude Include="pch.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Network\NetworkClient.h">
+      <Filter>Header Files\Network</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

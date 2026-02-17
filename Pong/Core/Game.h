@@ -29,17 +29,17 @@ public:
 	 * @param h The height of the screen
 	 * @param title The string shown in the title of the window
 	 * @param clrColor The color used to clear the screen each frame
+	 * @param network The network instance to be used for this game instance
 	 */
-	Game(float w, float h, const int8* title, Color clrColor);
+	Game(float w, float h, const int8* title, Color clrColor, INetwork* network);
 	~Game();
 
 public:
 	/**
 	 * Runs the complete game loop; including Tick and Rendering.
-	 * @param isServer The flag for whether this is running a server or not.
 	 * @return The success state of the Game Loop.
 	 */
-	int Run(bool isServer);
+	int Run();
 
 	/** Returns the max score required to win the game. */
 	uint8 GetGoalScore() const;
