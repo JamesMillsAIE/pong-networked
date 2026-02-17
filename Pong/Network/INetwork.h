@@ -34,40 +34,40 @@ public:
 
 protected:
 	/**
-	 *
-	 * @param address
-	 * @return
+	 * Creates a sided implementation of the ENetHost. This is abstract
+	 * and MUST be implemented.
+	 * @param address The network address to connect to.
 	 */
 	virtual ENetHost* CreateHost(ENetAddress& address) = 0;
 
 	/**
-	 * 
-	 * @return 
+	 * Constructs and returns the network address used when creating the host.
+	 * @return The ENetAddress to bind or connect to.
 	 */
 	virtual ENetAddress CreateAddress();
 
 	/**
-	 * 
-	 * @param peer 
+	 * Called when a remote client successfully connects to the host.
+	 * @param peer The peer representing the newly connected client.
 	 */
 	virtual void OnClientConnect(ENetPeer* peer);
 
 	/**
-	 * 
-	 * @param peer 
-	 * @param packet 
+	 * Called when a packet is received from a remote peer.
+	 * @param peer The peer that sent the packet.
+	 * @param packet The packet containing the received data.
 	 */
 	virtual void OnReceivePacket(ENetPeer* peer, ENetPacket* packet);
 
 	/**
-	 * 
-	 * @param peer 
+	 * Called when a remote client disconnects or times out from the host.
+	 * @param peer The peer representing the disconnected client.
 	 */
 	virtual void OnClientDisconnect(ENetPeer* peer);
 
 private:
-	ENetHost* m_host; /**< . */
-	ENetAddress m_address; /**< . */
+	ENetHost* m_host; /**< The ENet host instance managing all peer connections. */
+	ENetAddress m_address; /**< The network address the host is bound to or connecting from. */
 	string m_hostTypeName; /**< This is simply used for logging purposes. */
 
 };

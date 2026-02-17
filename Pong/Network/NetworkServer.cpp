@@ -22,3 +22,8 @@ ENetHost* NetworkServer::CreateHost(ENetAddress& address)
 		0			/* Assume any amount of outgoing bandwidth. */
 	);
 }
+
+void NetworkServer::OnReceivePacket(ENetPeer* peer, ENetPacket* packet)
+{
+
+}

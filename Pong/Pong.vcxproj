@@ -329,6 +329,7 @@
     <ClCompile Include="Network\INetwork.cpp" />
     <ClCompile Include="Network\NetworkClient.cpp" />
     <ClCompile Include="Network\NetworkServer.cpp" />
+    <ClCompile Include="Network\Packets\Packet.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core\Common.h" />
@@ -344,6 +345,7 @@
     <ClInclude Include="Network\INetwork.h" />
     <ClInclude Include="Network\NetworkClient.h" />
     <ClInclude Include="Network\NetworkServer.h" />
+    <ClInclude Include="Network\Packets\Packet.h" />
     <ClInclude Include="pch.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
